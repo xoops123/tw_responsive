@@ -1,0 +1,255 @@
+<{strip}>
+<{include_php file="`$smarty.const.XOOPS_THEME_PATH`/`$xoops_theme`/xugj_assign_theme_language_inc.php"}>
+<{include_php file="`$smarty.const.XOOPS_THEME_PATH`/`$xoops_theme`/xugj_assign_theme.php"}>
+<{include_php file="`$smarty.const.XOOPS_THEME_PATH`/`$xoops_theme`/xugj_already_js.php"}>
+<!DOCTYPE html>
+<{/strip}>
+<html lang="<{$xoops_langcode}>">
+<head>
+<title><{$xoops_sitename}> - <{if $xoops_pagetitle}><{$xoops_pagetitle}><{else}><{$xoops_slogan}><{/if}></title>
+<meta name="robots" content="<{$xoops_meta_robots}>" />
+<meta name="keywords" content="<{$xoops_meta_keywords}>" />
+<meta name="description" content="<{$xoops_meta_description}>" />
+<meta name="rating" content="<{$xoops_meta_rating}>" />
+<meta name="author" content="<{$xoops_meta_author}> <{$xoops_meta_copyright}>" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<{if $smarty.server.HTTP_USER_AGENT|regex_replace:'/^.*MSIE\s*([0-9]+).*$/i':'\1' > 7}>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<{/if}>
+<link rel="stylesheet" type="text/css" href="<{$xoops_imageurl}>css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="<{$xoops_imageurl}>css/bootstrap-responsive.min.css" />
+<link href="<{$xoops_url}>/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+<script type="text/javascript"><{$xoops_js|regex_replace:"/(\/\/\-\->|<!\-\-)/":""}></script>
+<{if ! $xcl22_jquery_is_already and ! $xugj_jquery_is_already}>
+<script type="text/javascript" src="<{$xoops_imageurl}>js/jquery-1.7.1.min.js"></script>
+<{/if}>
+<{if $xoops_module_header}><{$xoops_module_header}><{/if}><{if $xoops_block_header}><{$xoops_block_header}><{/if}>
+<script type="text/javascript" src="<{$xoops_imageurl}>js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<{$xoops_imageurl}>js/jquery.autogrow-textarea.js"></script>
+<link rel="stylesheet" type="text/css" href="<{$xoops_imageurl}>style.css" />
+<link rel="stylesheet" type="text/css" href="<{$xoops_imageurl}>modules.min.css" />
+<link rel="stylesheet" type="text/css" href="<{$xoops_imageurl}>color_min.php" />
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<script type="text/javascript">
+jQuery(document).ready(function() {
+	jQuery('.dropdown-toggle').dropdown();
+    jQuery('textarea').autogrow();
+});
+</script>
+</head>
+<body class="L<{$xoops_showlblock}>R<{$xoops_showrblock}> <{strip}>
+<{if $smarty.server.SCRIPT_FILENAME|basename == "index.php" and $smarty.server.SCRIPT_FILENAME|dirname|basename == $smarty.const.XOOPS_ROOT_PATH|basename}>
+	home
+<{else}>
+	<{if $xugj_trustdirname }>
+		<{$xugj_trustdirname}>
+	<{elseif !$xoops_dirname == ""}>
+		<{$xoops_dirname}>
+	<{else}>
+		other
+	<{/if}>
+<{/if}>
+"><{/strip}>
+
+<{assign var="layoutL" value=L$xoops_showlblock}>
+<{assign var="layoutR" value=R$xoops_showrblock}>
+<{assign var="layout" value=$layoutL$layoutR}>
+
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+        <ul class="nav" role="navigation">
+					<{include file="`$xoops_theme`/xugj_menu.html"}>
+        </ul>
+	</div>
+  </div>
+</div>
+
+<{* contents *}>
+<header id="overview">
+<div class="container">
+		<{include file="`$xoops_theme`/theme_title.html"}>
+</div><!-- /container -->
+</header>
+
+<{* main contents *}>
+
+<div class="container">
+<div class="row">
+
+	<{if $xoops_showlblock == 1}>
+	<div id="side_bar" class="span3"><{* side_bar left-column *}>
+
+		<{foreach item=block from=$xoops_lblocks name=lbloop}>
+			<div class="row">
+				<{if ! $block.title|strstr:"none"}><h3><{$block.title|regex_replace:"/\[\[\w+/":""}></h3><{/if}>
+				<{$block.content}>
+			</div>
+		<{/foreach}>
+
+	</div><{* /side_bar left-column *}>
+	<{/if}>
+
+<{* center contents *}>
+<div id="center_contents" class="span<{strip}>
+		<{if $layout == "L1R1"}>
+		6
+		<{elseif $layout == "L1R0"}>
+		9
+		<{elseif $layout == "L0R1"}>
+		9
+		<{else}>
+		12
+		<{/if}>
+"><{/strip}>
+
+   <!-- Center Center Column -->
+   <{if $xoops_ccblocks}>
+   <{foreach item=block from=$xoops_ccblocks name=ccloop}>
+	   <{if $block.weight == 0 }>
+			<div>
+		    <{if ! $block.title|strstr:"none"}><h2 class="BlockTitle"><{$block.title|regex_replace:"/\[\[\w+/":""}></h2><{/if}>
+		    <div class="BlockContent"><{$block.content}></div>
+	   </div>
+		 <{/if}>
+   <{/foreach}>
+   <{/if}>
+
+	<article id="main-content">
+			<{$xoops_contents}>
+	</article>
+
+   <!-- Center Center Column -->
+	<{foreach item=block from=$xoops_ccblocks name=ccloop}>
+		<{if $block.weight >= 1 }>
+			<div>
+			    <{if ! $block.title|strstr:"none"}><h3 class="BlockTitle"><{$block.title|regex_replace:"/\[\[\w+/":""}></h3><{/if}>
+			    <div class="BlockContent"><{$block.content}></div>
+	   </div>
+	 	<{/if}>
+	<{/foreach}>
+
+
+	<div class="row">
+
+   <!-- Center Left Column -->
+   <{if $xoops_clblocks}>
+		<div class="span<{strip}>
+		<{if $layout == "L1R1"}>
+		3
+		<{elseif $layout == "L1R0"}>
+		5
+		<{elseif $layout == "L0R1"}>
+		5
+		<{else}>
+		6
+		<{/if}>
+		"><{/strip}>
+   	
+	<{foreach item=block from=$xoops_clblocks name=clloop}>
+		<div class="span<{strip}>
+		<{if $layout == "L1R1"}>
+		3
+		<{elseif $layout == "L1R0"}>
+		5
+		<{elseif $layout == "L0R1"}>
+		5
+		<{else}>
+		6
+		<{/if}>
+		"><{/strip}>
+			    <{if ! $block.title|strstr:"none"}><h3 class="BlockTitle"><{$block.title|regex_replace:"/\[\[\w+/":""}></h3><{/if}>
+			    <div class="BlockContent"><{$block.content}></div>
+	   </div>
+	<{/foreach}>
+	</div>
+   <{/if}>
+
+   <!-- Center Right Column -->
+   <{if $xoops_crblocks}>
+		
+		<div class="span<{strip}>
+		<{if $layout == "L1R1"}>
+		3
+		<{elseif $layout == "L1R0"}>
+		4
+		<{elseif $layout == "L0R1"}>
+		4
+		<{else}>
+		6
+		<{/if}>
+		"><{/strip}>
+
+	   	<{foreach item=block from=$xoops_crblocks name=crloop}>
+		<div class="span<{strip}>
+		<{if $layout == "L1R1"}>
+		3
+		<{elseif $layout == "L1R0"}>
+		4
+		<{elseif $layout == "L0R1"}>
+		4
+		<{else}>
+		6
+		<{/if}>
+		"><{/strip}>
+				    <{if ! $block.title|strstr:"none"}><h3 class="BlockTitle"><{$block.title|regex_replace:"/\[\[\w+/":""}></h3><{/if}>
+				    <div class="BlockContent"><{$block.content}></div>
+		   </div>
+	    <{/foreach}>
+		</div>
+   <{/if}>
+
+	</div><{* / row *}>
+
+
+</div><{* / center contents *}>
+
+
+	<{if $xoops_showrblock == 1}>
+	<div id="right_bar" class="span3"><{* right-column *}>
+
+		<{foreach item=block from=$xoops_rblocks name=rbloop}>
+			<div>
+				<{if ! $block.title|strstr:"none"}><h3><{$block.title|regex_replace:"/\[\[\w+/":""}></h3><{/if}>
+				<{$block.content}>
+			</div>
+		<{/foreach}>
+
+	</div>
+	<{/if}>
+
+</div><!-- /row -->
+
+</div><!-- /container -->
+
+<{* /contents *}>
+
+<{* login block *}>
+<{include file="`$xoops_theme`/theme_cubelogin_block.html"}>
+
+<footer id="footer"><{* include right-column *}>
+	<div id="footer_menu">
+	<{if !$xoops_isuser}>
+		<a href="http://xoops123.com/">Theme designed by marine/mistgreen</a>&nbsp;|&nbsp;
+		<noscript><a href="<{$xoops_url}>/user.php">login(noscript)</a>&nbsp;|&nbsp;</noscript>
+		<a class="fancybox" href="#theme_login_block" title="<{$smarty.const._THEME_LANGUAGE_LOGIN}>"><{$smarty.const._THEME_LANGUAGE_LOGIN}></a>
+	<{else}>
+		<a href="<{$xoops_url}>/user.php"><{$smarty.const._THEME_LANGUAGE_USER_ACCOUNT}></a>&nbsp;|&nbsp;
+		<a href="<{$xoops_url}>/edituser.php"><{$smarty.const._THEME_LANGUAGE_EDIT_ACCOUNT}></a>&nbsp;|&nbsp;
+		<a href="<{$xoops_url}>/notifications.php"><{$smarty.const._THEME_LANGUAGE_NORTIFICATION}></a>&nbsp;|&nbsp;
+		<a href="<{$xoops_url}>/viewpmsg.php" <{if $pm.new_messages}>class="new1"<{/if}>><{$smarty.const._THEME_LANGUAGE_VIEWPMSG}>(<{$pm.new_messages}>)</a>&nbsp;|&nbsp;
+		<a href="<{$xoops_url}>/user.php?op=logout"><{$smarty.const._THEME_LANGUAGE_LOGOUT}></a>&nbsp;|&nbsp;
+		<{if $xoops_isadmin}>
+			<a href="<{$xoops_url}>/admin.php"><{$smarty.const._THEME_LANGUAGE_ADMIN_PAGE}></a>&nbsp;|&nbsp;
+		<{/if}>
+		<a href="http://xoops123.com/">Theme designed by marine/mistgreen</a>
+	<{/if}>
+	</div>
+</footer>
+
+<div id="xugj_pm_new_message" class="top-right"></div>
+</body>
+</html>
