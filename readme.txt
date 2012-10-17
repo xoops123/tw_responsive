@@ -3,7 +3,7 @@
 【作　成　者】 marine / mistgreen
 【動作　環境】 XOOPS Cube Legacy 2.1x (HD1.04)、2.2
 【ライセンス】 MIT
-【公 開 日　】 2012-10-7
+【公 開 日　】 2012-10-17
 
 ======================================================
 説明（概要）
@@ -14,6 +14,8 @@
 　XOOPSらしい３カラムのテーマですが、ブロックの配置により１カラム～３カラムに変化します。また、閲覧環境に応じて柔軟に各カラムの幅が切り替わり、ブラウザの表示幅が480pxより狭くなると１カラムデザインとなるなど、表示環境に応じてページレイアウトを切り替えるレスポンシブ・ウェブデザイン（Responsive Web Design ）となっています。
 　ヘッダーには、xugj_assign プラグインを利用して、インストールされたモジュールに対応するメニューバーを自動表示するようにしています。（簡単な設定変更で、マルチメニューを表示させることも可能）
 　また、フッターにユーザーメニュー項目も自動表示するので、xoopsの互換モジュールである「メインメニュー」「ユーザーメニュー」を利用しない運用が可能となっています。
+
+　色合い設定用のファイルを用意して、簡単に変更できる仕組みを追加してしてみました。
 
 　このテーマについては MIT ライセンスとさせていただきます。（TwitterBootstrapについては、Apache2ライセンス）
 
@@ -79,7 +81,34 @@
 
 【色合いの調整等】
 
-　本格的な調整は、TwitterBootstrapのcssを修正する必要があります。
+　TwitterBootstrapのcssから、主要な部分に関する記述を抜き出して、color_min.php としてまとめてみました。
+　この中の記述を変更すると、色合いの調整を行うことが可能となっています。
+
+　下記の記述のように、phpで色を定義しておりますので、各々色に該当するコードを変更すると必要箇所に反映されるようになっています。（例：基本背景色の #fafafa を #cccccc に変更するなど）
+
+<?php
+header('Content-Type: text/css'); 
+
+//config
+//基本色
+define('_TC_BG_COLOR','#fafafa'); 									//基本背景色
+define('_TC_BASE_COLOR','#333333'); 								//基本文字色
+
+define('_TC_NAV_COLOR','#777777'); 									//navbar 文字色
+define('_TC_NAVBG_COLOR','#fafafa'); 								//navbar background color
+define('_TC_NAVBG_IMAGE1','#ede4e1'); 							//navbar background image color 1
+define('_TC_NAVBG_IMAGE2','#e5c1cd'); 							//navbar background image color 2
+define('_TC_BREADCRUMB_BG_COLOR','#f5ecf4'); 				//パンくずリスト背景色
+define('_TC_BREADCRUMB_DIVIDER_COLOR','#8d6449'); 	//パンくずリスト区切り
+define('_TC_BREADCRUMB_ACTIVE_COLOR','#999999'); 		//パンくずリスト　アクティブ
+
+define('_TC_A_COLOR','#c85179'); 										//基本a
+define('_TC_A_HOVER_COLOR','#9a493f'); 							//基本a hover
+
+?>
+
+
+　なお、全てを変更する場合は、TwitterBootstrapのcssを修正する必要があります。
 　TwitterBootstrapのcssについては、オリジナルをそのまま採用していますので、当該サイトにおけるカスタマイズや関連サイトで紹介されている設定変更方法などを参照してください。
 
 
